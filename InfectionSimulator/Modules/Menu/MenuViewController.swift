@@ -5,7 +5,7 @@ final class MenuViewController: UIViewController {
     private let customView = MenuView()
     private var groupSize: Int = 0
     private var infectionFactor: Int = 0
-    private var infectionTime: Int = 0
+    private var infectionTime: Float = 0
     
     // MARK: - Lifecycle
     override func loadView() {
@@ -38,9 +38,8 @@ final class MenuViewController: UIViewController {
     }
     
     private func presentSimulationVC() {
-        let model = SimulationModel(groupSize: groupSize, infectionFactor: infectionFactor, infectionTime: infectionTime)
-        print(model)
-        let vc = ModulesFactory.makeSimulation()
+        let model = SimulationParameters(groupSize: groupSize, infectionFactor: infectionFactor, infectionTime: infectionTime)
+        let vc = ModulesFactory.makeSimulation(model: model)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
@@ -75,7 +74,8 @@ private extension MenuViewController {
             }
         case customView.timeToInfectTextField:
             if let text = sender.text {
-                if let infectionTime = Int(text) {
+                let formattedText = text.replacingOccurrences(of: ",", with: ".")
+                if let infectionTime = Float(formattedText) {
                     self.infectionTime = infectionTime
                 } else {
                     fallthrough

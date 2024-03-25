@@ -1,13 +1,9 @@
 import UIKit
 
-protocol HumanCellDelegate: AnyObject {
-    func didInfect(at indexPath: IndexPath)
-}
-
-final class HumanCell: UICollectionViewCell, Identifiable {
+final class HumanCell: UICollectionViewCell {
     static let identifier = "HumanCellId"
-    var indexPath: IndexPath = IndexPath(row: 0, section: 0)
-    weak var delegate: HumanCellDelegate?
+    var model: Human?
+    var isAnimating: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,16 +14,26 @@ final class HumanCell: UICollectionViewCell, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func infect(for time: TimeInterval, at indexPath: IndexPath) {
-        UIView.animate(withDuration: time) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        if isAnimating {
+            self.layer.removeAllAnimations()
             self.backgroundColor = .systemRed
-        } completion: { [weak self] _ in
-            guard let self else { return }
-            self.delegate?.didInfect(at: indexPath)
         }
     }
     
+    func infect(for time: TimeInterval) {
+        isAnimating = true
+        UIView.animate(withDuration: time) {
+            self.backgroundColor = .systemRed
+        } completion: { _ in
+            self.isAnimating = false
+        }
+    }
+    
+    /// Изначальный настройки UI
     private func fill() {
+        contentView.removeFromSuperview()
         backgroundColor = .white
     }
 }

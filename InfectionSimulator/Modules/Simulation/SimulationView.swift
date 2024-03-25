@@ -20,10 +20,18 @@ final class SimulationView: UIView {
     }()
     lazy var humansCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 5
+        flowLayout.minimumInteritemSpacing = 5
+        flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
+        flowLayout.estimatedItemSize = CGSize(width: 50, height: 50)
+        
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.backgroundColor = .clear
         collection.register(HumanCell.self, forCellWithReuseIdentifier: HumanCell.identifier)
         collection.isScrollEnabled = false
+        collection.bounces = false
+        collection.showsHorizontalScrollIndicator = false
+        collection.showsVerticalScrollIndicator = false
         return collection
     }()
     
@@ -36,7 +44,13 @@ final class SimulationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Устанавливает размеры contentView и humansCollectionView
+    /// - Parameters:
+    ///   - numberOfCells: Количество ячеек (людей)
+    ///   - cellSize: Размер ячейки
+    ///   - spacingBetween: Расстояние между ячейками
     func setupContentView(numberOfCells: CGFloat, cellSize: CGFloat, spacingBetween: CGFloat) {
+        // Текуюшие размеры экрана
         let screenSize = UIScreen.main.bounds.size
         
         DispatchQueue.global(qos: .default).async { [weak self] in
@@ -58,9 +72,6 @@ final class SimulationView: UIView {
                 )
                 self.scrollView.contentSize = self.contentView.frame.size
                 self.scrollView.minimumZoomScale = minimumZoomScale
-                
-                print(minimumZoomScale)
-                print(self.contentView.frame.size)
             }
         }
     }
@@ -84,24 +95,11 @@ final class SimulationView: UIView {
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-//            // contentView
-//            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-//            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-//            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-//            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-//            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-            
             // exitSimulationButton
             exitSimulationButton.widthAnchor.constraint(equalToConstant: 50),
             exitSimulationButton.heightAnchor.constraint(equalToConstant: 50),
-            exitSimulationButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            exitSimulationButton.topAnchor.constraint(equalTo: topAnchor, constant: 30),
             exitSimulationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-//            
-//            // humansCollectionView
-//            humansCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            humansCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-//            humansCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            humansCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
 }

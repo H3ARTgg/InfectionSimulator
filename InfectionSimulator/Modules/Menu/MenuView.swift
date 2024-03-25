@@ -19,7 +19,7 @@ final class MenuView: UIView {
         let field = UITextField()
         field.placeholder = "Time To Infect"
         field.backgroundColor = .systemGray
-        field.keyboardType = .numberPad
+        field.keyboardType = .decimalPad
         return field
     }()
     lazy var simulateButton: UIButton = {
@@ -40,6 +40,7 @@ final class MenuView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Блокирование/Разблокирование кнопки для моделирования заражения
     func activateSimulationButton(_ isActive: Bool) {
         let alpha = isActive ? 1 : 0.75
         UIView.animate(withDuration: 0.2) {
@@ -56,7 +57,6 @@ final class MenuView: UIView {
             addSubview($0)
         }
         
-        //
         NSLayoutConstraint.activate([
             // groupSizeTextField
             groupSizeTextField.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 20),
@@ -83,6 +83,6 @@ final class MenuView: UIView {
             simulateButton.widthAnchor.constraint(equalToConstant: 100)
         ])
         
-        activateSimulationButton(true)
+        activateSimulationButton(false)
     }
 }

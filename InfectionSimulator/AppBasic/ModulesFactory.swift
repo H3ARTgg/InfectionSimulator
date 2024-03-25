@@ -3,7 +3,7 @@ final class ModulesFactory {
         MenuViewController()
     }
     
-    static func makeSimulation() -> SimulationViewController {
-        SimulationViewController()
+    static func makeSimulation(model: SimulationParameters) -> SimulationViewController {
+        SimulationViewController(model: model)
     }
 }

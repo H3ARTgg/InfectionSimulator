@@ -17,7 +17,7 @@
 		1D877A562BAE44BA0022995B /* SimulationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A552BAE44BA0022995B /* SimulationView.swift */; };
 		1D877A582BAE44C60022995B /* SimulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A572BAE44C60022995B /* SimulationViewController.swift */; };
 		1D877A5B2BAE44E30022995B /* ModulesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A5A2BAE44E30022995B /* ModulesFactory.swift */; };
-		1D877A5D2BAE4FFB0022995B /* SimulationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A5C2BAE4FFB0022995B /* SimulationModel.swift */; };
+		1D877A5D2BAE4FFB0022995B /* SimulationParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A5C2BAE4FFB0022995B /* SimulationParameters.swift */; };
 		1D877A5F2BAE554D0022995B /* HumansDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A5E2BAE554D0022995B /* HumansDataSource.swift */; };
 		1D877A612BAE55540022995B /* HumanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A602BAE55540022995B /* HumanCell.swift */; };
 		1D877A642BAF95D90022995B /* Human.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A632BAF95D90022995B /* Human.swift */; };
@@ -37,7 +37,7 @@
 		1D877A552BAE44BA0022995B /* SimulationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationView.swift; sourceTree = "<group>"; };
 		1D877A572BAE44C60022995B /* SimulationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationViewController.swift; sourceTree = "<group>"; };
 		1D877A5A2BAE44E30022995B /* ModulesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesFactory.swift; sourceTree = "<group>"; };
-		1D877A5C2BAE4FFB0022995B /* SimulationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationModel.swift; sourceTree = "<group>"; };
+		1D877A5C2BAE4FFB0022995B /* SimulationParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationParameters.swift; sourceTree = "<group>"; };
 		1D877A5E2BAE554D0022995B /* HumansDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumansDataSource.swift; sourceTree = "<group>"; };
 		1D877A602BAE55540022995B /* HumanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanCell.swift; sourceTree = "<group>"; };
 		1D877A632BAF95D90022995B /* Human.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Human.swift; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				1D877A632BAF95D90022995B /* Human.swift */,
-				1D877A5C2BAE4FFB0022995B /* SimulationModel.swift */,
+				1D877A5C2BAE4FFB0022995B /* SimulationParameters.swift */,
 				1D877A652BAF9A910022995B /* IndexPath + Extension.swift */,
 				1D877A542BAE436C0022995B /* UI */,
 			);
@@ -247,7 +247,7 @@
 				1D877A5B2BAE44E30022995B /* ModulesFactory.swift in Sources */,
 				1D877A392BAE31CC0022995B /* MenuViewController.swift in Sources */,
 				1D877A4D2BAE34800022995B /* MenuView.swift in Sources */,
-				1D877A5D2BAE4FFB0022995B /* SimulationModel.swift in Sources */,
+				1D877A5D2BAE4FFB0022995B /* SimulationParameters.swift in Sources */,
 				1D877A352BAE31CC0022995B /* AppDelegate.swift in Sources */,
 				1D877A562BAE44BA0022995B /* SimulationView.swift in Sources */,
 				1D877A662BAF9A910022995B /* IndexPath + Extension.swift in Sources */,
