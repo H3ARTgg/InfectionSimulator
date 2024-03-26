@@ -27,6 +27,12 @@ final class SimulationView: UIView {
         label.textAlignment = .center
         return label
     }()
+    lazy var infectByPanButton: UIButton = {
+        let button = UIButton.systemButton(with: .pan, target: nil, action: nil)
+        button.backgroundColor = .clear
+        button.tintColor = .sWhite
+        return button
+    }()
     lazy var humansCollectionView: UICollectionView = {
         // Для оптимизации, чтобы были фиксированные значения
         let flowLayout = UICollectionViewFlowLayout()
@@ -93,7 +99,7 @@ final class SimulationView: UIView {
         
         [
             scrollView, contentView, humansCollectionView, 
-            exitSimulationButton, infectedLabel
+            exitSimulationButton, infectedLabel, infectByPanButton
         ].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -101,6 +107,7 @@ final class SimulationView: UIView {
         addSubview(scrollView)
         addSubview(exitSimulationButton)
         addSubview(infectedLabel)
+        addSubview(infectByPanButton)
         scrollView.addSubview(contentView)
         contentView.addSubview(humansCollectionView)
         
@@ -119,7 +126,13 @@ final class SimulationView: UIView {
             
             // infectedLabel
             infectedLabel.centerYAnchor.constraint(equalTo: exitSimulationButton.centerYAnchor),
-            infectedLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            infectedLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            // infectBySwipeButton
+            infectByPanButton.widthAnchor.constraint(equalToConstant: 30),
+            infectByPanButton.heightAnchor.constraint(equalToConstant: 30),
+            infectByPanButton.topAnchor.constraint(equalTo: exitSimulationButton.bottomAnchor, constant: 13),
+            infectByPanButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
     }
 }

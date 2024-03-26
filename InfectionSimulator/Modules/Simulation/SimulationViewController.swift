@@ -4,13 +4,21 @@ final class SimulationViewController: UIViewController {
     // Массив индексов зараженных ячеек (людей)
     private var infectedHumans: [IndexPath] = [] {
         didSet {
-            customView.infectedLabel.text = .infected + ": \(infectedHumans.count) / \(groupSize)"
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                customView.infectedLabel.text = .infected + ": \(infectedHumans.count) / \(groupSize)"
+            }
         }
     }
     // Массив людей
     private var humans: [[Human]] = []
     // Diffable DataSource
     private var dataSource: HumansDataSource?
+    private var isInfectByPanActive: Bool = false
+    private lazy var panGesture: UIPanGestureRecognizer = {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(didPan))
+        return gesture
+    }()
     // Кастомное вью
     private let customView = SimulationView()
     // Параметры симуляции
@@ -49,6 +57,7 @@ final class SimulationViewController: UIViewController {
         
         // Target
         customView.exitSimulationButton.addTarget(self, action: #selector(didTapExitSimulation), for: .touchUpInside)
+        customView.infectByPanButton.addTarget(self, action: #selector(didTapInfectBySwipe), for: .touchUpInside)
         
         // Вычисляем размеры humanCollectionView и contentView в зависимости от количества ячеек, размера ячейки и пространства между ячейками (делаем квадрат)
         customView.setupContentView(numberOfCells: CGFloat(groupSize), cellSize: Consts.cellSize, spacingBetween: Consts.spacing)
@@ -279,5 +288,34 @@ extension SimulationViewController: UIScrollViewDelegate {
 private extension SimulationViewController {
     func didTapExitSimulation() {
         dismiss(animated: true)
+    }
+    
+    func didTapInfectBySwipe(_ sender: UIButton) {
+        isInfectByPanActive.toggle()
+        // Отключаем/Включаем скролл
+        customView.scrollView.isScrollEnabled = !isInfectByPanActive
+        // Добавляем/Удаляем panGesture
+        isInfectByPanActive ? customView.contentView.addGestureRecognizer(panGesture) : customView.contentView.removeGestureRecognizer(panGesture)
+        
+        let color: UIColor = isInfectByPanActive ? .sGreen : .sWhite
+        sender.tintColor = color
+    }
+    
+    func didPan(_ gesture: UIPanGestureRecognizer) {
+        guard isInfectByPanActive else { return }
+        let collection = customView.humansCollectionView
+        let location = gesture.location(in: collection)
+        
+        switch gesture.state {
+        case .began, .changed:
+            if let indexPath = collection.indexPathForItem(at: location) {
+                guard !infectedHumans.contains(indexPath) else { break }
+                let cell = collection.cellForItem(at: indexPath) as? HumanCell
+                cell?.infect(for: TimeInterval(infectionTime))
+                didInfect(at: indexPath)
+            }
+        case _:
+            break
+        }
     }
 }
