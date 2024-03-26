@@ -22,6 +22,11 @@
 		1D877A612BAE55540022995B /* HumanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A602BAE55540022995B /* HumanCell.swift */; };
 		1D877A642BAF95D90022995B /* Human.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A632BAF95D90022995B /* Human.swift */; };
 		1D877A662BAF9A910022995B /* IndexPath + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A652BAF9A910022995B /* IndexPath + Extension.swift */; };
+		1D877A682BB24ED50022995B /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A672BB24ED50022995B /* Consts.swift */; };
+		1D877A6D2BB250F70022995B /* Urbanist-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D877A6A2BB250F60022995B /* Urbanist-Bold.ttf */; };
+		1D877A6E2BB250F70022995B /* Urbanist-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D877A6B2BB250F70022995B /* Urbanist-Regular.ttf */; };
+		1D877A6F2BB250F70022995B /* Urbanist-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D877A6C2BB250F70022995B /* Urbanist-Medium.ttf */; };
+		1D877A712BB2520C0022995B /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D877A702BB2520C0022995B /* UIFont + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +47,11 @@
 		1D877A602BAE55540022995B /* HumanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanCell.swift; sourceTree = "<group>"; };
 		1D877A632BAF95D90022995B /* Human.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Human.swift; sourceTree = "<group>"; };
 		1D877A652BAF9A910022995B /* IndexPath + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexPath + Extension.swift"; sourceTree = "<group>"; };
+		1D877A672BB24ED50022995B /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
+		1D877A6A2BB250F60022995B /* Urbanist-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-Bold.ttf"; sourceTree = "<group>"; };
+		1D877A6B2BB250F70022995B /* Urbanist-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-Regular.ttf"; sourceTree = "<group>"; };
+		1D877A6C2BB250F70022995B /* Urbanist-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-Medium.ttf"; sourceTree = "<group>"; };
+		1D877A702BB2520C0022995B /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +105,7 @@
 		1D877A492BAE322D0022995B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1D877A692BB250BB0022995B /* Fonts */,
 				1D877A3D2BAE31CF0022995B /* Assets.xcassets */,
 				1D877A3F2BAE31CF0022995B /* LaunchScreen.storyboard */,
 				1D877A422BAE31CF0022995B /* Info.plist */,
@@ -150,6 +161,7 @@
 		1D877A512BAE42B40022995B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1D877A672BB24ED50022995B /* Consts.swift */,
 				1D877A632BAF95D90022995B /* Human.swift */,
 				1D877A5C2BAE4FFB0022995B /* SimulationParameters.swift */,
 				1D877A652BAF9A910022995B /* IndexPath + Extension.swift */,
@@ -162,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				1D877A522BAE42C80022995B /* UIView + Extension.swift */,
+				1D877A702BB2520C0022995B /* UIFont + Extension.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -172,6 +185,16 @@
 				1D877A5A2BAE44E30022995B /* ModulesFactory.swift */,
 			);
 			path = AppBasic;
+			sourceTree = "<group>";
+		};
+		1D877A692BB250BB0022995B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1D877A6A2BB250F60022995B /* Urbanist-Bold.ttf */,
+				1D877A6C2BB250F70022995B /* Urbanist-Medium.ttf */,
+				1D877A6B2BB250F70022995B /* Urbanist-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,8 +255,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D877A6D2BB250F70022995B /* Urbanist-Bold.ttf in Resources */,
 				1D877A412BAE31CF0022995B /* LaunchScreen.storyboard in Resources */,
 				1D877A3E2BAE31CF0022995B /* Assets.xcassets in Resources */,
+				1D877A6F2BB250F70022995B /* Urbanist-Medium.ttf in Resources */,
+				1D877A6E2BB250F70022995B /* Urbanist-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D877A712BB2520C0022995B /* UIFont + Extension.swift in Sources */,
 				1D877A5B2BAE44E30022995B /* ModulesFactory.swift in Sources */,
 				1D877A392BAE31CC0022995B /* MenuViewController.swift in Sources */,
 				1D877A4D2BAE34800022995B /* MenuView.swift in Sources */,
@@ -255,6 +282,7 @@
 				1D877A642BAF95D90022995B /* Human.swift in Sources */,
 				1D877A5F2BAE554D0022995B /* HumansDataSource.swift in Sources */,
 				1D877A532BAE42C80022995B /* UIView + Extension.swift in Sources */,
+				1D877A682BB24ED50022995B /* Consts.swift in Sources */,
 				1D877A612BAE55540022995B /* HumanCell.swift in Sources */,
 				1D877A372BAE31CC0022995B /* SceneDelegate.swift in Sources */,
 			);
@@ -398,14 +426,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CCJ53Q5CP4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InfectionSimulator/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Infection Simulator";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -429,14 +460,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CCJ53Q5CP4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InfectionSimulator/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Infection Simulator";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (

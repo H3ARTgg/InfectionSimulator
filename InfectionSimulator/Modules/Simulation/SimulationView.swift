@@ -8,9 +8,12 @@ final class SimulationView: UIView {
     }()
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
+        view.backgroundColor = .clear
         view.isScrollEnabled = true
         view.minimumZoomScale = 0.5
         view.maximumZoomScale = 1.5
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
         return view
     }()
     lazy var contentView: UIView = {
@@ -20,10 +23,9 @@ final class SimulationView: UIView {
     }()
     lazy var humansCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.minimumLineSpacing = 5
-        flowLayout.minimumInteritemSpacing = 5
-        flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
-        flowLayout.estimatedItemSize = CGSize(width: 50, height: 50)
+        flowLayout.minimumInteritemSpacing = Consts.spacing
+        flowLayout.sectionInset = UIEdgeInsets(top: Consts.spacing, left: 0, bottom: 0, right: 0)
+        flowLayout.estimatedItemSize = CGSize(width: Consts.cellSize, height: Consts.cellSize)
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.backgroundColor = .clear
@@ -77,7 +79,7 @@ final class SimulationView: UIView {
     }
     
     private func fill() {
-        backgroundColor = .black
+        backgroundColor = .sBlack
         
         [scrollView, contentView, humansCollectionView, exitSimulationButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false

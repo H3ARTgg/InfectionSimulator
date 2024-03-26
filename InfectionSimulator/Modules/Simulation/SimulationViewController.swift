@@ -47,10 +47,15 @@ final class SimulationViewController: UIViewController {
         customView.exitSimulationButton.addTarget(self, action: #selector(didTapExitSimulation), for: .touchUpInside)
         
         // Вычисляем размеры humanCollectionView и contentView в зависимости от количества ячеек, размера ячейки и пространства между ячейками (делаем квадрат)
-        customView.setupContentView(numberOfCells: CGFloat(groupSize), cellSize: 50, spacingBetween: 5)
+        customView.setupContentView(numberOfCells: CGFloat(groupSize), cellSize: Consts.cellSize, spacingBetween: Consts.spacing)
         
         // Создание первоначального массива людей от количества людей
         createIniailHumans(for: groupSize)
+        
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] _ in
+            guard let self else { return }
+            self.customView.scrollView.zoomScale = self.customView.scrollView.minimumZoomScale + 0.3
+        }
     }
     
     /// Создает первоначальный массив людей
@@ -258,7 +263,6 @@ extension SimulationViewController: UIScrollViewDelegate {
             }
             
             DispatchQueue.main.async {
-                print(contentFrame.origin)
                 self.customView.contentView.frame = contentFrame
             }
         }
