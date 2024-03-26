@@ -60,7 +60,7 @@ final class SimulationView: UIView {
     ///   - spacingBetween: Расстояние между ячейками
     func setupContentView(numberOfCells: CGFloat, cellSize: CGFloat, spacingBetween: CGFloat) {
         // Изначальная установка infectedLabel
-        infectedLabel.text = "Заражено: 0 / \(Int(numberOfCells))"
+        infectedLabel.text = .infected + ": 0 / \(Int(numberOfCells))"
         // Текуюшие размеры экрана
         let screenSize = UIScreen.main.bounds.size
         

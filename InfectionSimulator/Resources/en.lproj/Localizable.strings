@@ -1,0 +1,16 @@
+// MenuView
+menu = "Menu";
+simulate = "Simulate";
+cancel = "Cancel";
+
+group_size = "Group Size";
+group_size_placeholder = "Enter the group size...";
+
+infection_factor = "Infectiousness";
+infection_factor_placeholder = "Enter the infection factor...";
+
+infection_time = "Infection Time";
+infection_time_placeholder = "Enter the infection time...";
+
+// SimulationView
+infected = "Infected";

@@ -1,0 +1,16 @@
+// MenuView
+menu = "Меню";
+simulate = "Симулировать";
+cancel = "Отмена";
+
+group_size = "Размер группы";
+group_size_placeholder = "Введите размер группы...";
+
+infection_factor = "Заразность";
+infection_factor_placeholder = "Введите фактор заражения...";
+
+infection_time = "Время заражения";
+infection_time_placeholder = "Введите время заражения...";
+
+// SimulationView
+infected = "Заражено";

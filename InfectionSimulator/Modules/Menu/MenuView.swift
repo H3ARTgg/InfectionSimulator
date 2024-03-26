@@ -6,7 +6,7 @@ final class MenuView: UIView {
         label.textColor = .sWhite
         label.font = .urbanist(size: 16, weight: .bold)
         label.textAlignment = .center
-        label.text = "Меню"
+        label.text = .menu
         return label
     }()
     lazy var groupSizeLabel: UILabel = {
@@ -14,7 +14,7 @@ final class MenuView: UIView {
         label.textColor = .sWhite
         label.font = .urbanist(size: 12, weight: .bold)
         label.textAlignment = .natural
-        label.text = "Размер группы"
+        label.text = .groupSize
         return label
     }()
     lazy var groupSizeTextField: UITextField = {
@@ -25,7 +25,7 @@ final class MenuView: UIView {
         field.cornerRadius(14.5)
         field.font = .urbanist(size: 12, weight: .bold)
         field.attributedPlaceholder = NSAttributedString(
-            string: "Введите размер группы...", 
+            string: .groupSizePlaceholder,
             attributes: [
                 .font: UIFont.urbanist(size: 12, weight: .bold),
                 .foregroundColor: UIColor.sLightGray
@@ -41,7 +41,7 @@ final class MenuView: UIView {
         let label = UILabel()
         label.textColor = .sWhite
         label.font = .urbanist(size: 12, weight: .bold)
-        label.text = "Заразность"
+        label.text = .infectionFactor
         label.textAlignment = .natural
         return label
     }()
@@ -53,7 +53,7 @@ final class MenuView: UIView {
         field.cornerRadius(14.5)
         field.font = .urbanist(size: 12, weight: .bold)
         field.attributedPlaceholder = NSAttributedString(
-            string: "Введите фактор заражения...",
+            string: .infectionFactorPlaceholder,
             attributes: [
                 .font: UIFont.urbanist(size: 12, weight: .bold),
                 .foregroundColor: UIColor.sLightGray
@@ -69,7 +69,7 @@ final class MenuView: UIView {
         let label = UILabel()
         label.textColor = .sWhite
         label.font = .urbanist(size: 12, weight: .bold)
-        label.text = "Время заражения"
+        label.text = .infectionTime
         label.textAlignment = .natural
         return label
     }()
@@ -81,7 +81,7 @@ final class MenuView: UIView {
         field.cornerRadius(14.5)
         field.font = .urbanist(size: 12, weight: .bold)
         field.attributedPlaceholder = NSAttributedString(
-            string: "Введите время заражения...",
+            string: .infectionTimePlaceholder,
             attributes: [
                 .font: UIFont.urbanist(size: 12, weight: .bold),
                 .foregroundColor: UIColor.sLightGray
@@ -96,7 +96,7 @@ final class MenuView: UIView {
     lazy var simulateButton: UIButton = {
         let button = UIButton.systemButton(with: UIImage(), target: nil, action: nil)
         button.backgroundColor = .sGreen
-        button.setTitle("Симулировать", for: .normal)
+        button.setTitle(.simulate, for: .normal)
         button.setTitleColor(.sWhite, for: .normal)
         button.cornerRadius(12)
         button.titleLabel?.font = .urbanist(size: 14, weight: .bold)
@@ -159,7 +159,7 @@ final class MenuView: UIView {
         for tag in 0...2 {
             let cancelButton = UIButton.systemButton(with: UIImage(), target: target, action: action)
             cancelButton.backgroundColor = .clear
-            cancelButton.setTitle("Отмена", for: .normal)
+            cancelButton.setTitle(.cancel, for: .normal)
             cancelButton.setTitleColor(.sGreen, for: .normal)
             cancelButton.titleLabel?.font = .urbanist(size: 12, weight: .bold)
             cancelButton.alpha = 0

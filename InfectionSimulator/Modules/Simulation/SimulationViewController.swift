@@ -4,7 +4,7 @@ final class SimulationViewController: UIViewController {
     // Массив индексов зараженных ячеек (людей)
     private var infectedHumans: [IndexPath] = [] {
         didSet {
-            customView.infectedLabel.text = "Заражено: \(infectedHumans.count) / \(groupSize)"
+            customView.infectedLabel.text = .infected + ": \(infectedHumans.count) / \(groupSize)"
         }
     }
     // Массив людей
