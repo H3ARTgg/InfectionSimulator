@@ -7,6 +7,10 @@ final class SimulationViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 customView.infectedLabel.text = .infected + ": \(infectedHumans.count) / \(groupSize)"
+                // Если все заразились, то задействовать хаптик
+                if infectedHumans.count == groupSize {
+                    haptic.notificationOccurred(.success)
+                }
             }
         }
     }
@@ -21,6 +25,8 @@ final class SimulationViewController: UIViewController {
     }()
     // Кастомное вью
     private let customView = SimulationView()
+    // Хаптик
+    private let haptic = UINotificationFeedbackGenerator()
     // Параметры симуляции
     private let infectionTime: Float
     private let infectionFactor: Int
@@ -70,6 +76,9 @@ final class SimulationViewController: UIViewController {
             guard let self else { return }
             self.customView.scrollView.zoomScale = self.customView.scrollView.minimumZoomScale + 0.3
         }
+        
+        // Подготовка хаптика
+        haptic.prepare()
     }
     
     /// Создает первоначальный массив людей
