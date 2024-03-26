@@ -104,6 +104,7 @@ final class MenuView: UIView {
     }()
     var cancelButtons: [UIButton] = []
     var trailingConstraints: [Int: NSLayoutConstraint] = [:]
+    var cancelButtonWidthConstraints: [Int: NSLayoutConstraint] = [:]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -132,6 +133,7 @@ final class MenuView: UIView {
         if isShowing {
             UIView.animate(withDuration: 0.25) {
                 self.trailingConstraints[fieldNumber]?.constant = -(80 + 40 + 10)
+                self.cancelButtonWidthConstraints[fieldNumber]?.constant = 80
                 self.cancelButtons.forEach { button in
                     if button.tag == fieldNumber {
                         button.alpha = 1
@@ -142,6 +144,7 @@ final class MenuView: UIView {
         } else {
             UIView.animate(withDuration: 0.25) {
                 self.trailingConstraints[fieldNumber]?.constant = -40
+                self.cancelButtonWidthConstraints[fieldNumber]?.constant = 0
                 self.cancelButtons.forEach { button in
                     if button.tag == fieldNumber {
                         button.alpha = 0
@@ -163,6 +166,8 @@ final class MenuView: UIView {
             cancelButton.translatesAutoresizingMaskIntoConstraints = false
             cancelButton.tag = tag
             
+            let widthConstraint = cancelButton.widthAnchor.constraint(equalToConstant: 80)
+            cancelButtonWidthConstraints[tag] = widthConstraint
             var centerYConstraint: NSLayoutConstraint = NSLayoutConstraint()
             switch tag {
             case 0:
@@ -177,7 +182,7 @@ final class MenuView: UIView {
             
             addSubview(cancelButton)
             NSLayoutConstraint.activate([
-                cancelButton.widthAnchor.constraint(equalToConstant: 80),
+                widthConstraint,
                 cancelButton.heightAnchor.constraint(equalToConstant: 30),
                 cancelButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
                 centerYConstraint
