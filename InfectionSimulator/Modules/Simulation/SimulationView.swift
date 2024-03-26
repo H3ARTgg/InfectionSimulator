@@ -1,10 +1,6 @@
 import UIKit
 
 final class SimulationView: UIView {
-    lazy var exitSimulationButton: UIButton = {
-        let button = UIButton.systemButton(with: .exitSimulation, target: nil, action: nil)
-        return button
-    }()
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
         view.backgroundColor = .clear
@@ -27,10 +23,21 @@ final class SimulationView: UIView {
         label.textAlignment = .center
         return label
     }()
+    lazy var exitSimulationButton: UIButton = {
+        let image: UIImage = .exitSimulation
+            .resizeImage(targetSize: CGSize(width: 20, height: 20))
+            .withTintColor(.sGreen, renderingMode: .alwaysOriginal)
+        let button = UIButton.systemButton(with: image, target: nil, action: nil)
+        button.cornerRadius(20)
+        button.backgroundColor = .sDarkGray.withAlphaComponent(0.5)
+        return button
+    }()
     lazy var infectByPanButton: UIButton = {
-        let button = UIButton.systemButton(with: .pan, target: nil, action: nil)
-        button.backgroundColor = .clear
+        let image: UIImage = .pan.resizeImage(targetSize: CGSize(width: 20, height: 20))
+        let button = UIButton.systemButton(with: image, target: nil, action: nil)
         button.tintColor = .sWhite
+        button.cornerRadius(20)
+        button.backgroundColor = .sDarkGray.withAlphaComponent(0.5)
         return button
     }()
     lazy var humansCollectionView: UICollectionView = {
@@ -119,8 +126,8 @@ final class SimulationView: UIView {
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             // exitSimulationButton
-            exitSimulationButton.widthAnchor.constraint(equalToConstant: 30),
-            exitSimulationButton.heightAnchor.constraint(equalToConstant: 30),
+            exitSimulationButton.widthAnchor.constraint(equalToConstant: 40),
+            exitSimulationButton.heightAnchor.constraint(equalToConstant: 40),
             exitSimulationButton.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 13),
             exitSimulationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             
@@ -129,8 +136,8 @@ final class SimulationView: UIView {
             infectedLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             // infectBySwipeButton
-            infectByPanButton.widthAnchor.constraint(equalToConstant: 30),
-            infectByPanButton.heightAnchor.constraint(equalToConstant: 30),
+            infectByPanButton.widthAnchor.constraint(equalToConstant: 40),
+            infectByPanButton.heightAnchor.constraint(equalToConstant: 40),
             infectByPanButton.topAnchor.constraint(equalTo: exitSimulationButton.bottomAnchor, constant: 13),
             infectByPanButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
