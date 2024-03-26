@@ -2,8 +2,7 @@ import UIKit
 
 final class SimulationView: UIView {
     lazy var exitSimulationButton: UIButton = {
-        let image = (UIImage(systemName: "xmark") ?? UIImage()).withTintColor(.red, renderingMode: .alwaysOriginal)
-        let button = UIButton.systemButton(with: image, target: nil, action: nil)
+        let button = UIButton.systemButton(with: .exitSimulation, target: nil, action: nil)
         return button
     }()
     lazy var scrollView: UIScrollView = {
@@ -21,7 +20,15 @@ final class SimulationView: UIView {
         view.backgroundColor = .clear
         return view
     }()
+    lazy var infectedLabel: UILabel = {
+        let label = UILabel()
+        label.font = .urbanist(size: 16, weight: .bold)
+        label.textColor = .sWhite
+        label.textAlignment = .center
+        return label
+    }()
     lazy var humansCollectionView: UICollectionView = {
+        // Для оптимизации, чтобы были фиксированные значения
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = Consts.spacing
         flowLayout.sectionInset = UIEdgeInsets(top: Consts.spacing, left: 0, bottom: 0, right: 0)
@@ -36,6 +43,12 @@ final class SimulationView: UIView {
         collection.showsVerticalScrollIndicator = false
         return collection
     }()
+    private var numberOfCells: CGFloat = .zero {
+        didSet {
+            // Изначальная установка infectedLabel
+            infectedLabel.text = "Заражено: 0 / \(Int(numberOfCells))"
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,16 +65,18 @@ final class SimulationView: UIView {
     ///   - cellSize: Размер ячейки
     ///   - spacingBetween: Расстояние между ячейками
     func setupContentView(numberOfCells: CGFloat, cellSize: CGFloat, spacingBetween: CGFloat) {
+        self.numberOfCells = numberOfCells
         // Текуюшие размеры экрана
         let screenSize = UIScreen.main.bounds.size
         
         DispatchQueue.global(qos: .default).async { [weak self] in
             guard let self else { return }
-            let width = sqrt(numberOfCells).rounded(.down) * cellSize + (sqrt(numberOfCells).rounded(.down) * spacingBetween)
+            let width = sqrt(numberOfCells).rounded(.up) * cellSize + (sqrt(numberOfCells).rounded(.up) * spacingBetween)
             let height = sqrt(numberOfCells).rounded(.up) * cellSize + (sqrt(numberOfCells).rounded(.up) * spacingBetween)
             
             let contentViewWidth = max(width, screenSize.width)
             let contentViewHeight = max(height, screenSize.height)
+            // Вычисляем минимальный зум
             let minimumZoomScale = contentViewWidth < screenSize.width ? 0.5 : screenSize.width / contentViewWidth
             
             DispatchQueue.main.async {
@@ -78,15 +93,44 @@ final class SimulationView: UIView {
         }
     }
     
+    func animateInfectedLabelChanging(from startValue: Int, to endValue: Int, duration: Double) {
+        let animationDuration = duration // Продолжительность анимации в секундах
+        let animationSteps = duration * 11 // Количество шагов анимации
+        
+        let stepDuration = animationDuration / animationSteps // Продолжительность одного шага анимации
+        let valueIncrement = (endValue - startValue) / Int(animationSteps) // Изменение значения на один шаг
+        
+        var currentValue = startValue // Текущее значение для анимации
+        func updateLabelValue() {
+            if (startValue < endValue && currentValue < endValue) || (startValue > endValue && currentValue > endValue) {
+                currentValue += valueIncrement // Изменяем текущее значение
+                infectedLabel.text = "Заражено: \(currentValue) / \(numberOfCells)" // Обновляем текст метки
+                
+                // Планируем следующее обновление
+                Timer.scheduledTimer(withTimeInterval: stepDuration, repeats: false) { _ in
+                    updateLabelValue()
+                }
+            } else {
+                infectedLabel.text = "Заражено: \(endValue) / \(numberOfCells)" // Убедимся, что конечное значение установлено точно
+            }
+        }
+        
+        updateLabelValue()
+    }
+    
     private func fill() {
         backgroundColor = .sBlack
         
-        [scrollView, contentView, humansCollectionView, exitSimulationButton].forEach {
+        [
+            scrollView, contentView, humansCollectionView, 
+            exitSimulationButton, infectedLabel
+        ].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         addSubview(scrollView)
         addSubview(exitSimulationButton)
+        addSubview(infectedLabel)
         scrollView.addSubview(contentView)
         contentView.addSubview(humansCollectionView)
         
@@ -98,10 +142,14 @@ final class SimulationView: UIView {
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             // exitSimulationButton
-            exitSimulationButton.widthAnchor.constraint(equalToConstant: 50),
-            exitSimulationButton.heightAnchor.constraint(equalToConstant: 50),
-            exitSimulationButton.topAnchor.constraint(equalTo: topAnchor, constant: 30),
-            exitSimulationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            exitSimulationButton.widthAnchor.constraint(equalToConstant: 30),
+            exitSimulationButton.heightAnchor.constraint(equalToConstant: 30),
+            exitSimulationButton.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 13),
+            exitSimulationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            
+            // infectedLabel
+            infectedLabel.centerYAnchor.constraint(equalTo: exitSimulationButton.centerYAnchor),
+            infectedLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 }

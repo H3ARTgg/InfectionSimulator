@@ -1,8 +1,12 @@
 import UIKit
 
 final class SimulationViewController: UIViewController {
-    // Массив зараженных ячеек (людей)
-    private var infectedHumans: [IndexPath] = []
+    // Массив индексов зараженных ячеек (людей)
+    private var infectedHumans: [IndexPath] = [] {
+        didSet {
+            customView.infectedLabel.text = "Заражено: \(infectedHumans.count) / \(groupSize)"
+        }
+    }
     // Массив людей
     private var humans: [[Human]] = []
     // Diffable DataSource
@@ -52,6 +56,7 @@ final class SimulationViewController: UIViewController {
         // Создание первоначального массива людей от количества людей
         createIniailHumans(for: groupSize)
         
+        // Увеличиваем масштаб, но не полностью, чтобы не сильно нагрузить
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] _ in
             guard let self else { return }
             self.customView.scrollView.zoomScale = self.customView.scrollView.minimumZoomScale + 0.3
@@ -64,7 +69,7 @@ final class SimulationViewController: UIViewController {
         DispatchQueue.global(qos: .userInteractive).async {
             var humans: [[Human]] = []
             let sections = Int(sqrt(Double(groupSize)).rounded(.up))
-            let rows = Int(sqrt(Double(groupSize)).rounded(.down))
+            let rows = Int(sqrt(Double(groupSize)).rounded(.up))
             
             for section in 0..<sections {
                 var humanSection: [Human] = []
