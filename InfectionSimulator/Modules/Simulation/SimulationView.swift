@@ -43,12 +43,6 @@ final class SimulationView: UIView {
         collection.showsVerticalScrollIndicator = false
         return collection
     }()
-    private var numberOfCells: CGFloat = .zero {
-        didSet {
-            // Изначальная установка infectedLabel
-            infectedLabel.text = "Заражено: 0 / \(Int(numberOfCells))"
-        }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,7 +59,8 @@ final class SimulationView: UIView {
     ///   - cellSize: Размер ячейки
     ///   - spacingBetween: Расстояние между ячейками
     func setupContentView(numberOfCells: CGFloat, cellSize: CGFloat, spacingBetween: CGFloat) {
-        self.numberOfCells = numberOfCells
+        // Изначальная установка infectedLabel
+        infectedLabel.text = "Заражено: 0 / \(Int(numberOfCells))"
         // Текуюшие размеры экрана
         let screenSize = UIScreen.main.bounds.size
         
@@ -91,31 +86,6 @@ final class SimulationView: UIView {
                 self.scrollView.minimumZoomScale = minimumZoomScale
             }
         }
-    }
-    
-    func animateInfectedLabelChanging(from startValue: Int, to endValue: Int, duration: Double) {
-        let animationDuration = duration // Продолжительность анимации в секундах
-        let animationSteps = duration * 11 // Количество шагов анимации
-        
-        let stepDuration = animationDuration / animationSteps // Продолжительность одного шага анимации
-        let valueIncrement = (endValue - startValue) / Int(animationSteps) // Изменение значения на один шаг
-        
-        var currentValue = startValue // Текущее значение для анимации
-        func updateLabelValue() {
-            if (startValue < endValue && currentValue < endValue) || (startValue > endValue && currentValue > endValue) {
-                currentValue += valueIncrement // Изменяем текущее значение
-                infectedLabel.text = "Заражено: \(currentValue) / \(numberOfCells)" // Обновляем текст метки
-                
-                // Планируем следующее обновление
-                Timer.scheduledTimer(withTimeInterval: stepDuration, repeats: false) { _ in
-                    updateLabelValue()
-                }
-            } else {
-                infectedLabel.text = "Заражено: \(endValue) / \(numberOfCells)" // Убедимся, что конечное значение установлено точно
-            }
-        }
-        
-        updateLabelValue()
     }
     
     private func fill() {
