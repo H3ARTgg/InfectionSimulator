@@ -23,6 +23,11 @@ final class SimulationViewController: UIViewController {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(didPan))
         return gesture
     }()
+    private lazy var doubleTapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap))
+        gesture.numberOfTapsRequired = 2
+        return gesture
+    }()
     // Кастомное вью
     private let customView = SimulationView()
     // Хаптик
@@ -79,6 +84,9 @@ final class SimulationViewController: UIViewController {
         
         // Подготовка хаптика
         haptic.prepare()
+        
+        // Увеличиваем/Уменьшаем масштаб по двойному тапу
+        customView.scrollView.addGestureRecognizer(doubleTapGesture)
     }
     
     /// Создает первоначальный массив людей
@@ -325,6 +333,16 @@ private extension SimulationViewController {
             }
         case _:
             break
+        }
+    }
+    
+    func didDoubleTap(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: customView.humansCollectionView)
+        
+        if customView.scrollView.zoomScale < 1 {
+            customView.scrollView.zoom(to: CGRect(origin: location, size: .zero), animated: true)
+        } else {
+            customView.scrollView.setZoomScale(customView.scrollView.minimumZoomScale, animated: true)
         }
     }
 }
